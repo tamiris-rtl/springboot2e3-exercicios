@@ -26,13 +26,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest // Indica para o Spring subir o contexto completo da aplicação
 @AutoConfigureMockMvc // Configuração para usar o Mock MVC
-@AutoConfigureJsonTesters
+@AutoConfigureJsonTesters // Configuração para usar o jackson tester
 class ConsultaControllerTest {
 
     @Autowired
     private MockMvc mvc; // Simula requisições http
 
     @Autowired
+    // "Converte" um objeto para o formato json
     private JacksonTester<DadosAgendamentoConsulta> dadosAgendamentoConsultaJson;
 
     @Autowired
@@ -58,13 +59,15 @@ class ConsultaControllerTest {
         var data = LocalDateTime.now().plusHours(1);
         var especialidade = Especialidade.CARDIOLOGIA;
 
+        // Configurar para o mockito conseguir simular o comportamento da agenda de consultas e retornar os dados
+        // do detalhamento quando o método agendar for chamado
         var dadosDetalhamento = new DadosDetalhamentoConsulta(null, 2l, 5l, data);
         when(agendaDeConsultas.agendar(any())).thenReturn(dadosDetalhamento);
 
         var response = mvc
                 .perform(
                         post("/consultas")
-                                .contentType(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON) // Define que será passado um json na requisição
                                 .content(dadosAgendamentoConsultaJson.write(
                                         new DadosAgendamentoConsulta(2l, 5l, data, especialidade)
                                 ).getJson())
