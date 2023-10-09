@@ -1,4 +1,3 @@
-# springboot-exercicios
 
 Repositório para armazenamento do código desenvolvido durante os curso da alura: <br>
 - https://cursos.alura.com.br/course/spring-boot-aplique-boas-praticas-proteja-api-rest
