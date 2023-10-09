@@ -43,7 +43,7 @@ class ConsultaControllerTest {
 
     @Test
     @DisplayName("Deveria devolver codigo http 400 quando informacoes estao invalidas")
-    @WithMockUser
+    @WithMockUser // Usa um mock para simular um usuário para conseguir realizar a requisição
     void agendar_cenario1() throws Exception {
         var response = mvc.perform(post("/consultas"))
                 .andReturn().getResponse();
