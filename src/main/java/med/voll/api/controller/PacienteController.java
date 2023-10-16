@@ -24,6 +24,7 @@ public class PacienteController {
 
     @PostMapping
     @Transactional
+    // É uma convenção de API Rest retornar a uri de um recurso criado
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroPaciente dados, UriComponentsBuilder uriBuilder) {
         var paciente = new Paciente(dados);
         repository.save(paciente);
