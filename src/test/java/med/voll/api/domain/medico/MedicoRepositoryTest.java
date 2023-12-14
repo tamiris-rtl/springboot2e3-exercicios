@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest //Indica que será testada uma interface repository
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //Define que vai utilizar o mesmo banco da aplicação (mysql)
-@ActiveProfiles("test") // indica que seja utilizado o arquivo application-test pra configurar o database
+//@ActiveProfiles("test") // indica que seja utilizado o arquivo application-test pra configurar o database
 class MedicoRepositoryTest {
 
     @Autowired
