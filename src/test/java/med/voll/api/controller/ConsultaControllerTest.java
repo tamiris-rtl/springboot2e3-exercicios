@@ -56,12 +56,12 @@ class ConsultaControllerTest {
     @DisplayName("Deveria devolver codigo http 200 quando informacoes estao validas")
     @WithMockUser
     void agendar_cenario2() throws Exception {
-        var data = LocalDatTime.now().plusHours(1);
+        var data = LocalDateTime.now().plusHours(1);
         var especialidade = Especialidade.CARDIOLOGIA;
 
         // Configurar para o mockito conseguir simular o comportamento da agenda de consultas e retornar os dados
         // do detalhamento quando o método agendar for chamado
-        var dadosDetalhamento = new DadosDetalhamentoConsulta(null, 2l, 5l, data);
+        var dadosDetalhamento = new DadosDetalhamentoConsulta(null, 5l, 5l, data);
         when(agendaDeConsultas.agendar(any())).thenReturn(dadosDetalhamento);
 
         var response = mvc
