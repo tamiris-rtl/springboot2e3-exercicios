@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Copiando repositório
         uses: actions/checkout@v2
 
       - name: Set up JDK 17
@@ -19,14 +19,14 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Grant execute permissions to mvnw
+      - name: Executando permissões para o maven
         run: chmod +x mvnw
 
       - name: ativando mysql
         run:
           sudo /etc/init.d/mysql start
 
-      - name: Build with Maven
+      - name: Build do projeto
         run: |
           ./mvnw clean install
 
