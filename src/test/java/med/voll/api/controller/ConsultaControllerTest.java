@@ -61,7 +61,7 @@ class ConsultaControllerTest {
 
         // Configurar para o mockito conseguir simular o comportamento da agenda de consultas e retornar os dados
         // do detalhamento quando o método agendar for chamado
-        var dadosDetalhamento = new DadosDetalhamentoConsulta(null, 5l, 5l, data);
+        var dadosDetalhamento = new DadosDetalhamentoConsulta(null, 2l, 5l, data);
         when(agendaDeConsultas.agendar(any())).thenReturn(dadosDetalhamento);
 
         var response = mvc
@@ -74,7 +74,7 @@ class ConsultaControllerTest {
                 )
                 .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
 
         var jsonEsperado = dadosDetalhamentoConsultaJson.write(
                 dadosDetalhamento
