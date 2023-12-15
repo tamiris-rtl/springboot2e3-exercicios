@@ -36,9 +36,10 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/teste'
         run: |
           git branch -a  # Exibe as branches disponíveis para fins de debug
-          git checkout -b main origin/main || git checkout main
+          git fetch origin main:main || git checkout -b main origin/main
           git merge ${{ github.sha }}
           git push origin main
+
 #  test:
 #    runs-on: ubuntu-latest
 #
