@@ -1,10 +1,52 @@
+#name: Java CI with Spring Boot
+#
+#on:
+#  push:
+#    branches:
+#      - main
+#      - teste
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Copiando repositório
+#        uses: actions/checkout@v2
+#
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v2
+#        with:
+#          distribution: 'adopt'
+#          java-version: '17'
+#
+#      - name: Executando permissões para o maven
+#        run: chmod +x mvnw
+#
+#      - name: ativando mysql
+#        run:
+#          sudo /etc/init.d/mysql start
+#
+#      - name: Build do projeto
+#        run: |
+#          ./mvnw clean install
+#
+#      - name: Upload para a branch main
+#        if: github.event_name == 'push' && github.ref == 'refs/heads/teste'
+#        env:
+#          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+#        run: |
+#          git branch -a  # Exibe as branches disponíveis para fins de debug
+#          git fetch origin main:main || git checkout -b main origin/main
+#          git merge ${{ github.sha }}
+#          git push https://${GH_TOKEN}@github.com/${{ github.repository }}.git main
+
 name: Java CI with Spring Boot
 
 on:
   push:
     branches:
       - main
-      - teste
 
 jobs:
   build:
@@ -30,18 +72,6 @@ jobs:
       - name: Build do projeto
         run: |
           ./mvnw clean install
-
-      - name: Upload para a branch main
-        if: github.event_name == 'push' && github.ref == 'refs/heads/teste'
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          git branch -a  # Exibe as branches disponíveis para fins de debug
-          git fetch origin main:main || git checkout -b main origin/main
-          git merge ${{ github.sha }}
-          git push https://${GH_TOKEN}@github.com/${{ github.repository }}.git main
-
-
 
 #  test:
 #    runs-on: ubuntu-latest
