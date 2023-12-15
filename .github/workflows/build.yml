@@ -31,14 +31,17 @@ jobs:
         run: |
           ./mvnw clean install
 
-      # Adicionando condição para executar apenas na branch 'teste'
       - name: Upload para a branch main
         if: github.event_name == 'push' && github.ref == 'refs/heads/teste'
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git branch -a  # Exibe as branches disponíveis para fins de debug
           git fetch origin main:main || git checkout -b main origin/main
           git merge ${{ github.sha }}
+          git remote set-url origin https://${GH_TOKEN}@github.com/${{ github.repository }}.git
           git push origin main
+
 
 #  test:
 #    runs-on: ubuntu-latest
