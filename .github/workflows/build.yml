@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - teste
 
 jobs:
   build:
@@ -29,6 +30,14 @@ jobs:
       - name: Build do projeto
         run: |
           ./mvnw clean install
+
+      # Adicionando condição para executar apenas na branch 'teste'
+      - name: Upload para a branch main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/teste'
+        run: |
+          git checkout main
+          git merge ${{ github.sha }}
+          git push origin main
 
 #  test:
 #    runs-on: ubuntu-latest
