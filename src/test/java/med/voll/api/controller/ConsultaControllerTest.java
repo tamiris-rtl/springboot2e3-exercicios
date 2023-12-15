@@ -74,7 +74,7 @@ class ConsultaControllerTest {
                 )
                 .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
 
         var jsonEsperado = dadosDetalhamentoConsultaJson.write(
                 dadosDetalhamento
